@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Fraction Calculator</string>
+    <string name="calc_field_initial">0</string>
+    <string name="calc_seven">7</string>
+    <string name="calc_eighth">8</string>
+    <string name="calc_ninth">9</string>
+    <string name="calc_clear">⌫</string>
+    <string name="calc_fourth">4</string>
+    <string name="calc_fifth">5</string>
+    <string name="calc_sixth">6</string>
+    <string name="calc_divide">÷</string>
+    <string name="calc_first">1</string>
+    <string name="calc_second">2</string>
+    <string name="calc_third">3</string>
+    <string name="calc_multiple">×</string>
+    <string name="calc_zero">0</string>
+    <string name="calc_dot">.</string>
+    <string name="calc_calculate">=</string>
+    <string name="calc_minus">-</string>
+    <string name="calc_plus">+</string>
+    <string name="calc_whole">Whole</string>
+    <string name="calc_numerator">Numerator</string>
+    <string name="calc_denominator">Multiple</string>
 </resources>
