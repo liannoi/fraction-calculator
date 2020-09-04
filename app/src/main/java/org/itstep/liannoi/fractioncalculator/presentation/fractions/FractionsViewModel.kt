@@ -39,11 +39,6 @@ class FractionsViewModel : ViewModel() {
         assign(true)
     }
 
-    fun assignNumerator(unused: View? = null) {
-        context.setStrategy(NumeratorAssignStrategy())
-        assign()
-    }
-
     fun calculate(unused: View) {
         assignNumerator()
         val result: Fraction
@@ -58,8 +53,7 @@ class FractionsViewModel : ViewModel() {
     }
 
     fun prepareAddition(unused: View) {
-        operationType = FractionOperationType.ADDITION
-        assignNumerator()
+        this.prepareOperation(FractionOperationType.ADDITION)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -74,6 +68,16 @@ class FractionsViewModel : ViewModel() {
         context.assign(currentValue)
         clear()
         _denominatorMode.value = denominatorMode
+    }
+
+    private fun assignNumerator(unused: View? = null) {
+        context.setStrategy(NumeratorAssignStrategy())
+        assign()
+    }
+
+    private fun prepareOperation(operationType: FractionOperationType) {
+        this.operationType = operationType
+        assignNumerator()
     }
 
     ///////////////////////////////////////////////////////////////////////////

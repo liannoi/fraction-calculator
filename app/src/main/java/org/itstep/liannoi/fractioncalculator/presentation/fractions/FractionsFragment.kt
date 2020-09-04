@@ -12,7 +12,6 @@ import io.reactivex.rxjava3.core.Observable
 import org.itstep.liannoi.fractioncalculator.R
 import org.itstep.liannoi.fractioncalculator.application.fractions.commands.AppendCommand
 import org.itstep.liannoi.fractioncalculator.application.fractions.commands.BackspaceCommand
-import org.itstep.liannoi.fractioncalculator.application.fractions.commands.DivideCommand
 import org.itstep.liannoi.fractioncalculator.databinding.FragmentFractionsBinding
 import org.itstep.liannoi.fractioncalculator.presentation.common.extensions.getViewModelFactory
 
@@ -45,10 +44,6 @@ class FractionsFragment : Fragment() {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun subscribeButtons() {
-        subscribeButton(R.id.calc_divide_button) {
-            DivideCommand.Handler().handle(DivideCommand(viewModel.calc))
-        }
-
         subscribeButton(R.id.calc_clear_button) {
             BackspaceCommand.Handler().handle(BackspaceCommand(viewModel.calc))
         }
