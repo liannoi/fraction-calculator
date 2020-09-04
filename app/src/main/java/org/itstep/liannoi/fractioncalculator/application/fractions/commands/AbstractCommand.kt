@@ -1,7 +1,7 @@
 package org.itstep.liannoi.fractioncalculator.application.fractions.commands
 
 import androidx.lifecycle.MutableLiveData
-import org.itstep.liannoi.fractioncalculator.application.common.commands.UnitRequest
+import org.itstep.liannoi.fractioncalculator.application.common.interfaces.UnitRequest
 import org.itstep.liannoi.fractioncalculator.presentation.PresentationDefaults
 
 abstract class AbstractCommand constructor(

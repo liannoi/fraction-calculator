@@ -4,5 +4,5 @@ import org.itstep.liannoi.fractioncalculator.application.fractions.models.Fracti
 
 interface FractionCalculator {
 
-    fun calculate(): Fraction
+    fun addition(): Fraction
 }

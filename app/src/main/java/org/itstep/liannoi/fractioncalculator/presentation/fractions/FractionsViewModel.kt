@@ -9,19 +9,23 @@ import org.itstep.liannoi.fractioncalculator.application.common.fractions.Calcul
 import org.itstep.liannoi.fractioncalculator.application.common.fractions.FractionCalculator
 import org.itstep.liannoi.fractioncalculator.application.fractions.DefaultCalculationContext
 import org.itstep.liannoi.fractioncalculator.application.fractions.DefaultFractionCalculator
+import org.itstep.liannoi.fractioncalculator.application.fractions.models.Fraction
 import org.itstep.liannoi.fractioncalculator.application.fractions.strategy.DenominatorAssignStrategy
 import org.itstep.liannoi.fractioncalculator.application.fractions.strategy.NumeratorAssignStrategy
 import org.itstep.liannoi.fractioncalculator.presentation.PresentationDefaults
 
 class FractionsViewModel : ViewModel() {
 
-    private val calculationContext: CalculationContext = DefaultCalculationContext()
-    private val calculator: FractionCalculator = DefaultFractionCalculator(calculationContext)
+    private val context: CalculationContext = DefaultCalculationContext()
+    private val calculator: FractionCalculator = DefaultFractionCalculator(context)
+    private lateinit var operationType: FractionOperationType
 
     private val _denominatorMode: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val denominatorMode: LiveData<Boolean> = _denominatorMode
 
     val calc: MutableLiveData<String> = MutableLiveData<String>()
+
+    val lastResult: MutableLiveData<String> = MutableLiveData<String>()
 
     private val currentValue: Int
         get() = calc.value!!.toInt()
@@ -31,18 +35,31 @@ class FractionsViewModel : ViewModel() {
     }
 
     fun assignDenominator(unused: View) {
-        calculationContext.setStrategy(DenominatorAssignStrategy())
+        context.setStrategy(DenominatorAssignStrategy())
         assign(true)
     }
 
     fun assignNumerator(unused: View? = null) {
-        calculationContext.setStrategy(NumeratorAssignStrategy())
+        context.setStrategy(NumeratorAssignStrategy())
         assign()
     }
 
     fun calculate(unused: View) {
         assignNumerator()
-        Log.d(TAG, "calculate: ${calculator.calculate()}")
+        val result: Fraction
+
+        when (operationType) {
+            FractionOperationType.ADDITION -> result = calculator.addition()
+        }
+
+        Log.d(TAG, "calculate: $result")
+        lastResult.value = "${result.numerator}/${result.denominator}"
+        context.reset()
+    }
+
+    fun prepareAddition(unused: View) {
+        operationType = FractionOperationType.ADDITION
+        assignNumerator()
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -54,7 +71,7 @@ class FractionsViewModel : ViewModel() {
     }
 
     private fun assign(denominatorMode: Boolean = false) {
-        calculationContext.assign(currentValue)
+        context.assign(currentValue)
         clear()
         _denominatorMode.value = denominatorMode
     }

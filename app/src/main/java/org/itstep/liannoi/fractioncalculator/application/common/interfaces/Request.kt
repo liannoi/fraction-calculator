@@ -1,4 +1,4 @@
-package org.itstep.liannoi.fractioncalculator.application.common.commands
+package org.itstep.liannoi.fractioncalculator.application.common.interfaces
 
 interface UnitRequest : Request<Unit>
 

@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
             type="org.itstep.liannoi.fractioncalculator.presentation.fractions.FractionsViewModel" />
@@ -162,13 +164,12 @@
             app:layout_constraintTop_toBottomOf="@+id/calc_first_button" />
 
         <Button
-            android:id="@+id/calc_denominator_button"
+            android:id="@+id/calc_minus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:enabled="@{!viewmodel.denominatorMode}"
-            android:onClick="@{viewmodel::assignDenominator}"
-            android:text="@string/calc_denominator"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:enabled="false"
+            android:text="@string/calc_minus"
             app:layout_constraintStart_toEndOf="@+id/calc_zero_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_second_button" />
 
@@ -178,31 +179,43 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
             android:enabled="@{viewmodel.denominatorMode}"
-            android:onClick="@{viewmodel::assignNumerator}"
+            android:onClick="@{viewmodel::prepareAddition}"
             android:text="@string/calc_plus"
-            app:layout_constraintStart_toEndOf="@+id/calc_denominator_button"
+            app:layout_constraintStart_toEndOf="@+id/calc_minus_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_third_button" />
-
-        <Button
-            android:id="@+id/calc_minus_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:enabled="false"
-            android:text="@string/calc_minus"
-            app:layout_constraintStart_toEndOf="@+id/calc_plus_button"
-            app:layout_constraintTop_toBottomOf="@+id/calc_multiple_button" />
 
         <Button
             android:id="@+id/calc_calculate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_normal"
             android:onClick="@{viewmodel::calculate}"
             android:text="@string/calc_calculate"
+            app:layout_constraintStart_toEndOf="@+id/calc_plus_button"
+            app:layout_constraintTop_toBottomOf="@+id/calc_multiple_button" />
+
+        <Button
+            android:id="@+id/calc_denominator_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:enabled="@{!viewmodel.denominatorMode}"
+            android:onClick="@{viewmodel::assignDenominator}"
+            android:text="@string/calc_denominator"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calc_minus_button" />
+            app:layout_constraintTop_toBottomOf="@+id/calc_calculate_button" />
+
+        <TextView
+            android:id="@+id/calc_last_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text='@{"Last Result: " + viewmodel.lastResult}'
+            android:visibility="@{viewmodel.lastResult == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

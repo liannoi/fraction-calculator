@@ -1,70 +1,66 @@
 package org.itstep.liannoi.fractioncalculator.application.fractions.queries
 
-import org.itstep.liannoi.fractioncalculator.application.common.commands.BaseRequestHandler
-import org.itstep.liannoi.fractioncalculator.application.common.commands.Request
+import org.itstep.liannoi.fractioncalculator.application.common.interfaces.BaseRequestHandler
+import org.itstep.liannoi.fractioncalculator.application.common.interfaces.MathClient
+import org.itstep.liannoi.fractioncalculator.application.common.interfaces.Request
 import org.itstep.liannoi.fractioncalculator.application.fractions.models.Fraction
 
-// TODO: 04.09.2020 Large refactoring of this class!
 class AdditionQuery constructor(
     private val firstFraction: Fraction,
     private val secondFraction: Fraction
 ) : Request<Fraction> {
 
-    class Handler : BaseRequestHandler<AdditionQuery, Fraction> {
+    class Handler constructor(
+        private val mathClient: MathClient
+    ) : BaseRequestHandler<AdditionQuery, Fraction> {
 
         override fun handle(request: AdditionQuery): Fraction {
-            val lcm = lcm(
-                request.firstFraction.denominator.toLong(),
-                request.secondFraction.denominator.toLong()
-            )
+            val lcm: Int = calculateLcm(request)
 
-            val tempFirstFraction = Fraction()
-            val tempSecondFraction = Fraction()
+            return calculateResult(
+                prepareFirstFraction(lcm, request),
+                prepareSecondFraction(lcm, request)
+            )
+        }
+
+        ///////////////////////////////////////////////////////////////////////////
+        // Helpers
+        ///////////////////////////////////////////////////////////////////////////
+
+        private fun calculateLcm(request: AdditionQuery): Int = mathClient.lcm(
+            request.firstFraction.denominator,
+            request.secondFraction.denominator
+        )
+
+        private fun prepareFirstFraction(lcm: Int, request: AdditionQuery): Fraction {
             val result = Fraction()
 
-            tempFirstFraction.numerator =
-                ((lcm / request.firstFraction.denominator) * request.firstFraction.numerator).toInt()
-            tempFirstFraction.denominator =
-                ((lcm / request.firstFraction.denominator) * request.firstFraction.denominator).toInt()
-            tempSecondFraction.numerator =
-                ((lcm / request.secondFraction.denominator) * request.secondFraction.numerator).toInt()
-            tempSecondFraction.denominator =
-                ((lcm / request.secondFraction.denominator) * request.secondFraction.denominator).toInt()
+            result.numerator =
+                (lcm / request.firstFraction.denominator * request.firstFraction.numerator)
 
-            result.numerator = tempFirstFraction.numerator + tempSecondFraction.numerator
-            result.denominator = tempSecondFraction.denominator
+            result.denominator =
+                (lcm / request.firstFraction.denominator) * request.firstFraction.denominator
 
             return result
         }
 
-        ///////////////////////////////////////////////////////////////////////////
-        // Math
-        ///////////////////////////////////////////////////////////////////////////
+        private fun prepareSecondFraction(lcm: Int, request: AdditionQuery): Fraction {
+            val result = Fraction()
 
-        private fun gcd(a: Long, b: Long): Long {
-            var a = a
-            var b = b
-            while (b > 0) {
-                val temp = b
-                b = a % b // % is remainder
-                a = temp
-            }
-            return a
-        }
+            result.numerator =
+                (lcm / request.secondFraction.denominator) * request.secondFraction.numerator
 
-        private fun gcd(input: LongArray): Long {
-            var result = input[0]
-            for (i in 1 until input.size) result = gcd(result, input[i])
+            result.denominator =
+                (lcm / request.secondFraction.denominator) * request.secondFraction.denominator
+
             return result
         }
 
-        private fun lcm(a: Long, b: Long): Long {
-            return a * (b / gcd(a, b))
-        }
+        private fun calculateResult(firstFraction: Fraction, secondFraction: Fraction): Fraction {
+            val result = Fraction()
+            result.numerator = firstFraction.numerator + secondFraction.numerator
+            result.denominator = secondFraction.denominator
 
-        private fun lcm(input: LongArray): Long {
-            var result = input[0]
-            for (i in 1 until input.size) result = lcm(result, input[i])
             return result
         }
     }

@@ -11,4 +11,6 @@ interface CalculationContext {
     fun getFirstFraction(): Fraction
 
     fun getSecondFraction(): Fraction
+
+    fun reset()
 }

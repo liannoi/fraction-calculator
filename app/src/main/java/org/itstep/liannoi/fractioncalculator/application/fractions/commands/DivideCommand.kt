@@ -1,7 +1,7 @@
 package org.itstep.liannoi.fractioncalculator.application.fractions.commands
 
 import androidx.lifecycle.MutableLiveData
-import org.itstep.liannoi.fractioncalculator.application.common.commands.RequestHandler
+import org.itstep.liannoi.fractioncalculator.application.common.interfaces.RequestHandler
 import org.itstep.liannoi.fractioncalculator.presentation.PresentationDefaults
 
 class DivideCommand constructor(

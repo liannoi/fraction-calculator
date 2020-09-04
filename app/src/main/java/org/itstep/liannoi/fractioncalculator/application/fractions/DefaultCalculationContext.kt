@@ -7,8 +7,12 @@ import org.itstep.liannoi.fractioncalculator.application.fractions.models.Fracti
 class DefaultCalculationContext : CalculationContext {
 
     private lateinit var strategy: AssignStrategy
-    private val firstFraction: Fraction = Fraction()
-    private val secondFraction: Fraction = Fraction()
+    private lateinit var firstFraction: Fraction
+    private lateinit var secondFraction: Fraction
+
+    init {
+        reset()
+    }
 
     override fun setStrategy(strategy: AssignStrategy) {
         this.strategy = strategy
@@ -20,5 +24,10 @@ class DefaultCalculationContext : CalculationContext {
 
     override fun assign(value: Int) {
         strategy.assign(firstFraction, secondFraction, value)
+    }
+
+    override fun reset() {
+        firstFraction = Fraction()
+        secondFraction = Fraction()
     }
 }
