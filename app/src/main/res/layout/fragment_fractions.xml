@@ -31,6 +31,7 @@
             android:maxLines="1"
             android:paddingStart="@dimen/margin_normal"
             android:paddingEnd="@dimen/margin_normal"
+            android:text="@={viewmodel.calc}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
+            android:enabled="false"
             android:text="@string/calc_divide"
             app:layout_constraintStart_toEndOf="@+id/calc_sixth_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_clear_button" />
@@ -144,6 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
+            android:enabled="false"
             android:text="@string/calc_multiple"
             app:layout_constraintStart_toEndOf="@+id/calc_third_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_divide_button" />
@@ -159,21 +162,25 @@
             app:layout_constraintTop_toBottomOf="@+id/calc_first_button" />
 
         <Button
-            android:id="@+id/calc_dot_button"
+            android:id="@+id/calc_denominator_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:text="@string/calc_dot"
+            android:layout_marginTop="16dp"
+            android:enabled="@{!viewmodel.denominatorMode}"
+            android:onClick="@{viewmodel::assignDenominator}"
+            android:text="@string/calc_denominator"
             app:layout_constraintStart_toEndOf="@+id/calc_zero_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_second_button" />
 
         <Button
-            android:id="@+id/calc_calculate_button"
+            android:id="@+id/calc_plus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
-            android:text="@string/calc_calculate"
-            app:layout_constraintStart_toEndOf="@+id/calc_dot_button"
+            android:enabled="@{viewmodel.denominatorMode}"
+            android:onClick="@{viewmodel::assignNumerator}"
+            android:text="@string/calc_plus"
+            app:layout_constraintStart_toEndOf="@+id/calc_denominator_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_third_button" />
 
         <Button
@@ -181,50 +188,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
+            android:enabled="false"
             android:text="@string/calc_minus"
-            app:layout_constraintStart_toEndOf="@+id/calc_calculate_button"
+            app:layout_constraintStart_toEndOf="@+id/calc_plus_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_multiple_button" />
 
         <Button
-            android:id="@+id/calc_plus_button"
+            android:id="@+id/calc_calculate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
-            android:text="@string/calc_plus"
-            app:layout_constraintStart_toEndOf="@+id/calc_calculate_button"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:onClick="@{viewmodel::calculate}"
+            android:text="@string/calc_calculate"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calc_minus_button" />
 
-        <Button
-            android:id="@+id/calc_whole_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:enabled="false"
-            android:text="@string/calc_whole"
-            app:layout_constraintBottom_toBottomOf="@+id/calc_numerator_button"
-            app:layout_constraintEnd_toStartOf="@+id/calc_numerator_button"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/calc_numerator_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/calc_numerator"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/calc_denominator_button"
-            app:layout_constraintStart_toEndOf="@+id/calc_whole_button" />
-
-        <Button
-            android:id="@+id/calc_denominator_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/calc_denominator"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/calc_numerator_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
