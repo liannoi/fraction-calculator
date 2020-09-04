@@ -6,7 +6,7 @@ interface CalculationContext {
 
     fun setStrategy(strategy: AssignStrategy)
 
-    fun assign(value: Float)
+    fun assign(value: Int)
 
     fun getFirstFraction(): Fraction
 

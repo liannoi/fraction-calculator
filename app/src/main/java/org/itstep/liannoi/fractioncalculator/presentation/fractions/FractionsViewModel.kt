@@ -23,8 +23,8 @@ class FractionsViewModel : ViewModel() {
 
     val calc: MutableLiveData<String> = MutableLiveData<String>()
 
-    private val currentValue: Float
-        get() = calc.value!!.toFloat()
+    private val currentValue: Int
+        get() = calc.value!!.toInt()
 
     init {
         clear()

@@ -23,13 +23,13 @@ class AdditionQuery constructor(
             val result = Fraction()
 
             tempFirstFraction.numerator =
-                (lcm / request.firstFraction.denominator) * request.firstFraction.numerator
+                ((lcm / request.firstFraction.denominator) * request.firstFraction.numerator).toInt()
             tempFirstFraction.denominator =
-                (lcm / request.firstFraction.denominator) * request.firstFraction.denominator
+                ((lcm / request.firstFraction.denominator) * request.firstFraction.denominator).toInt()
             tempSecondFraction.numerator =
-                (lcm / request.secondFraction.denominator) * request.secondFraction.numerator
+                ((lcm / request.secondFraction.denominator) * request.secondFraction.numerator).toInt()
             tempSecondFraction.denominator =
-                (lcm / request.secondFraction.denominator) * request.secondFraction.denominator
+                ((lcm / request.secondFraction.denominator) * request.secondFraction.denominator).toInt()
 
             result.numerator = tempFirstFraction.numerator + tempSecondFraction.numerator
             result.denominator = tempSecondFraction.denominator

@@ -5,9 +5,9 @@ import org.itstep.liannoi.fractioncalculator.application.fractions.models.Fracti
 
 class NumeratorAssignStrategy : AssignStrategy {
 
-    override fun assign(first: Fraction, second: Fraction, value: Float) {
+    override fun assign(first: Fraction, second: Fraction, value: Int) {
         when {
-            first.denominator != 0.0F ->
+            first.denominator != 0 ->
                 second.denominator = value
             else ->
                 first.denominator = value

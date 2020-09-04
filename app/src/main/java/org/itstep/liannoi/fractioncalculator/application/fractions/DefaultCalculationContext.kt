@@ -18,7 +18,7 @@ class DefaultCalculationContext : CalculationContext {
 
     override fun getSecondFraction(): Fraction = secondFraction
 
-    override fun assign(value: Float) {
+    override fun assign(value: Int) {
         strategy.assign(firstFraction, secondFraction, value)
     }
 }

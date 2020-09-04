@@ -4,5 +4,5 @@ import org.itstep.liannoi.fractioncalculator.application.fractions.models.Fracti
 
 interface AssignStrategy {
 
-    fun assign(first: Fraction, second: Fraction, value: Float)
+    fun assign(first: Fraction, second: Fraction, value: Int)
 }
