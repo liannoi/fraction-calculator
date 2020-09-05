@@ -45,6 +45,7 @@ class FractionsViewModel : ViewModel() {
         val result: Fraction = when (operationType) {
             FractionsOperationType.ADDITION -> calculator.addition()
             FractionsOperationType.SUBTRACTION -> calculator.subtraction()
+            FractionsOperationType.MULTIPLICATION -> calculator.multiplication()
         }
 
         Log.d(TAG, "calculate: $result")

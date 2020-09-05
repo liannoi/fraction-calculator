@@ -151,7 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
-            android:enabled="false"
+            android:enabled="@{viewmodel.denominatorMode}"
+            android:onClick="@{() -> viewmodel.prepareOperation(FractionsOperationType.MULTIPLICATION)}"
             android:text="@string/calc_multiple"
             app:layout_constraintStart_toEndOf="@+id/calc_third_button"
             app:layout_constraintTop_toBottomOf="@+id/calc_divide_button" />

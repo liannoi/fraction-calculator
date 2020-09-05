@@ -7,4 +7,6 @@ interface FractionCalculator {
     fun addition(): Fraction
 
     fun subtraction(): Fraction
+
+    fun multiplication(): Fraction
 }
