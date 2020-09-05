@@ -18,7 +18,7 @@ class FractionsViewModel : ViewModel() {
 
     private val context: CalculationContext = DefaultCalculationContext()
     private val calculator: FractionCalculator = DefaultFractionCalculator(context)
-    private lateinit var operationType: FractionOperationType
+    private lateinit var operationType: FractionsOperationType
 
     private val _denominatorMode: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val denominatorMode: LiveData<Boolean> = _denominatorMode
@@ -34,17 +34,17 @@ class FractionsViewModel : ViewModel() {
         clear()
     }
 
-    fun assignDenominator(unused: View) {
+    fun assignDenominator(@Suppress("UNUSED_PARAMETER") unused: View) {
         context.setStrategy(DenominatorAssignStrategy())
         assign(true)
     }
 
-    fun calculate(unused: View) {
+    fun calculate(@Suppress("UNUSED_PARAMETER") unused: View) {
         assignNumerator()
-        val result: Fraction
 
-        when (operationType) {
-            FractionOperationType.ADDITION -> result = calculator.addition()
+        val result: Fraction = when (operationType) {
+            FractionsOperationType.ADDITION -> calculator.addition()
+            FractionsOperationType.SUBTRACTION -> calculator.subtraction()
         }
 
         Log.d(TAG, "calculate: $result")
@@ -52,8 +52,9 @@ class FractionsViewModel : ViewModel() {
         context.reset()
     }
 
-    fun prepareAddition(unused: View) {
-        this.prepareOperation(FractionOperationType.ADDITION)
+    fun prepareOperation(operationType: FractionsOperationType) {
+        this.operationType = operationType
+        assignNumerator()
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -70,14 +71,9 @@ class FractionsViewModel : ViewModel() {
         _denominatorMode.value = denominatorMode
     }
 
-    private fun assignNumerator(unused: View? = null) {
+    private fun assignNumerator(@Suppress("UNUSED_PARAMETER") unused: View? = null) {
         context.setStrategy(NumeratorAssignStrategy())
         assign()
-    }
-
-    private fun prepareOperation(operationType: FractionOperationType) {
-        this.operationType = operationType
-        assignNumerator()
     }
 
     ///////////////////////////////////////////////////////////////////////////
