@@ -41,12 +41,23 @@ class FractionsViewModel : ViewModel() {
 
     fun calculate(@Suppress("UNUSED_PARAMETER") unused: View) {
         assignNumerator()
+        val result: Fraction
 
-        val result: Fraction = when (operationType) {
-            FractionsOperationType.ADDITION -> calculator.addition()
-            FractionsOperationType.SUBTRACTION -> calculator.subtraction()
-            FractionsOperationType.MULTIPLICATION -> calculator.multiplication()
-            FractionsOperationType.DIVISION -> calculator.division()
+        try {
+            result = when (operationType) {
+                FractionsOperationType.ADDITION -> calculator.addition()
+                FractionsOperationType.SUBTRACTION -> calculator.subtraction()
+                FractionsOperationType.MULTIPLICATION -> calculator.multiplication()
+                FractionsOperationType.DIVISION -> calculator.division()
+            }
+        } catch (e: UninitializedPropertyAccessException) {
+            Log.d(
+                TAG,
+                "calculate: An attempt to calculate the result, before choosing an operation."
+            )
+
+            e.printStackTrace()
+            return
         }
 
         Log.d(TAG, "calculate: $result")
