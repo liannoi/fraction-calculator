@@ -5,6 +5,7 @@ import org.itstep.liannoi.fractioncalculator.application.common.fractions.Fracti
 import org.itstep.liannoi.fractioncalculator.application.common.interfaces.MathClient
 import org.itstep.liannoi.fractioncalculator.application.fractions.models.Fraction
 import org.itstep.liannoi.fractioncalculator.application.fractions.queries.AdditionQuery
+import org.itstep.liannoi.fractioncalculator.application.fractions.queries.DivisionQuery
 import org.itstep.liannoi.fractioncalculator.application.fractions.queries.MultiplicationQuery
 import org.itstep.liannoi.fractioncalculator.application.fractions.queries.SubtractionQuery
 import org.itstep.liannoi.fractioncalculator.infrastructure.math.DefaultMathClient
@@ -26,4 +27,8 @@ class DefaultFractionCalculator constructor(
     override fun multiplication(): Fraction =
         MultiplicationQuery.Handler()
             .handle(MultiplicationQuery(context.getFirstFraction(), context.getSecondFraction()))
+
+    override fun division(): Fraction =
+        DivisionQuery.Handler()
+            .handle(DivisionQuery(context.getFirstFraction(), context.getSecondFraction()))
 }

@@ -46,6 +46,7 @@ class FractionsViewModel : ViewModel() {
             FractionsOperationType.ADDITION -> calculator.addition()
             FractionsOperationType.SUBTRACTION -> calculator.subtraction()
             FractionsOperationType.MULTIPLICATION -> calculator.multiplication()
+            FractionsOperationType.DIVISION -> calculator.division()
         }
 
         Log.d(TAG, "calculate: $result")

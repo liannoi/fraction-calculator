@@ -6,5 +6,7 @@ enum class FractionsOperationType(val value: Int) {
 
     SUBTRACTION(1),
 
-    MULTIPLICATION(2)
+    MULTIPLICATION(2),
+
+    DIVISION(3)
 }
